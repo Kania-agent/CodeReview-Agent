@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeReview Agent — AI Code Review</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-left">
+            <div class="logo">⚡ CodeReview Agent</div>
+            <span class="ai-tag">MiMo V2.5</span>
+        </div>
+        <div class="topbar-right">
+            <div class="review-stats">
+                <span class="stat critical-stat">● 2 Critical</span>
+                <span class="stat warning-stat">● 4 Warnings</span>
+                <span class="stat info-stat">● 3 Suggestions</span>
+            </div>
+            <button class="btn-approve" id="approveBtn">✓ Approve</button>
+        </div>
+    </header>
+
+    <div class="workspace">
+        <aside class="file-tree">
+            <div class="tree-header">📁 Files Changed</div>
+            <div class="tree-item active" data-file="0">
+                <span class="file-icon">📄</span>
+                <span>src/auth/login.ts</span>
+                <span class="change-badge red">+42 -18</span>
+            </div>
+            <div class="tree-item" data-file="1">
+                <span class="file-icon">📄</span>
+                <span>src/utils/crypto.ts</span>
+                <span class="change-badge yellow">+28 -5</span>
+            </div>
+            <div class="tree-item" data-file="2">
+                <span class="file-icon">📄</span>
+                <span>src/models/user.ts</span>
+                <span class="change-badge green">+15 -2</span>
+            </div>
+            <div class="tree-item" data-file="3">
+                <span class="file-icon">📄</span>
+                <span>tests/auth.test.ts</span>
+                <span class="change-badge green">+67 -0</span>
+            </div>
+        </aside>
+
+        <main class="editor-area">
+            <div class="file-header">
+                <span class="file-path">src/auth/login.ts</span>
+                <span class="file-meta">3 changes · reviewed by MiMo V2.5</span>
+            </div>
+            <div class="diff-container" id="diffContainer"></div>
+        </main>
+
+        <aside class="comments-panel" id="commentsPanel">
+            <div class="comments-header">
+                <h3>Review Comments</h3>
+                <span class="comment-count" id="commentCount">3 comments</span>
+            </div>
+            <div class="comments-list" id="commentsList"></div>
+            <div class="comment-input-area">
+                <textarea id="commentInput" placeholder="Add a review comment..." rows="2"></textarea>
+                <button class="btn-comment" id="addCommentBtn">Comment</button>
+            </div>
+        </aside>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
