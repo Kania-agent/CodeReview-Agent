@@ -3,70 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeReview Agent — AI Code Review</title>
+    <title>CodeReview-Agent</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="topbar">
-        <div class="topbar-left">
-            <div class="logo">⚡ CodeReview Agent</div>
-            <span class="ai-tag">MiMo V2.5</span>
-        </div>
-        <div class="topbar-right">
-            <div class="review-stats">
-                <span class="stat critical-stat">● 2 Critical</span>
-                <span class="stat warning-stat">● 4 Warnings</span>
-                <span class="stat info-stat">● 3 Suggestions</span>
-            </div>
-            <button class="btn-approve" id="approveBtn">✓ Approve</button>
-        </div>
+    <header>
+        <h1>&#128269; CodeReview-Agent</h1>
+        <p class="subtitle">Paste code, click Review, get instant feedback</p>
     </header>
 
-    <div class="workspace">
-        <aside class="file-tree">
-            <div class="tree-header">📁 Files Changed</div>
-            <div class="tree-item active" data-file="0">
-                <span class="file-icon">📄</span>
-                <span>src/auth/login.ts</span>
-                <span class="change-badge red">+42 -18</span>
+    <main>
+        <section class="input-section">
+            <div class="toolbar">
+                <select id="languageSelect">
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                </select>
+                <button id="reviewBtn">&#9654; Review</button>
+                <button id="clearBtn">&#10005; Clear</button>
+                <button id="sampleBtn">&#128203; Load Sample</button>
             </div>
-            <div class="tree-item" data-file="1">
-                <span class="file-icon">📄</span>
-                <span>src/utils/crypto.ts</span>
-                <span class="change-badge yellow">+28 -5</span>
-            </div>
-            <div class="tree-item" data-file="2">
-                <span class="file-icon">📄</span>
-                <span>src/models/user.ts</span>
-                <span class="change-badge green">+15 -2</span>
-            </div>
-            <div class="tree-item" data-file="3">
-                <span class="file-icon">📄</span>
-                <span>tests/auth.test.ts</span>
-                <span class="change-badge green">+67 -0</span>
-            </div>
-        </aside>
+            <textarea id="codeInput" placeholder="Paste your code here..." spellcheck="false"></textarea>
+        </section>
 
-        <main class="editor-area">
-            <div class="file-header">
-                <span class="file-path">src/auth/login.ts</span>
-                <span class="file-meta">3 changes · reviewed by MiMo V2.5</span>
+        <section id="resultsSection" class="results-section hidden">
+            <div class="score-bar">
+                <div class="score-label">Quality Score</div>
+                <div class="score-track"><div id="scoreFill" class="score-fill"></div></div>
+                <div id="scoreValue" class="score-value">0</div>
             </div>
-            <div class="diff-container" id="diffContainer"></div>
-        </main>
 
-        <aside class="comments-panel" id="commentsPanel">
-            <div class="comments-header">
-                <h3>Review Comments</h3>
-                <span class="comment-count" id="commentCount">3 comments</span>
+            <div class="summary-stats" id="summaryStats"></div>
+
+            <div class="tabs">
+                <button class="tab active" data-tab="issues">Issues</button>
+                <button class="tab" data-tab="comparison">Before / After</button>
             </div>
-            <div class="comments-list" id="commentsList"></div>
-            <div class="comment-input-area">
-                <textarea id="commentInput" placeholder="Add a review comment..." rows="2"></textarea>
-                <button class="btn-comment" id="addCommentBtn">Comment</button>
+
+            <div id="issuesPanel" class="tab-panel active">
+                <div id="issueList" class="issue-list"></div>
             </div>
-        </aside>
-    </div>
+
+            <div id="comparisonPanel" class="tab-panel">
+                <div class="diff-container">
+                    <div class="diff-pane">
+                        <h3>Original</h3>
+                        <pre id="diffOriginal"></pre>
+                    </div>
+                    <div class="diff-pane">
+                        <h3>Suggested Fix</h3>
+                        <pre id="diffFixed"></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <script src="app.js"></script>
 </body>
